@@ -27,7 +27,8 @@ public class SequenceFileReadDemo {
             long position = reader.getPosition();  
             while (reader.next(key, value)) {  
                 String syncSeen = reader.syncSeen() ? "*" : "";  
-                System.out.printf("[%s%s]\t%s\t%s\n", position, syncSeen, key, value);  
+                System.out.println("position:"+ position+"----syncSeen:"+syncSeen);  
+                System.out.println("key:"+ key+"----value:"+value);  
                 position = reader.getPosition(); // beginning of next record  
             }
         } finally {  
