@@ -15,12 +15,17 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
 public class SurceReader {
+	enum Counter{
+		Count1
+	}
 
 	public static class TokenizerMapper extends
 			Mapper<Object, Object, Text, IntWritable> {
 		public void map(Object key, Object value, Context context)
 				throws IOException, InterruptedException {
 				System.out.println("key:"+key+"---value:"+value);
+				context.setStatus("key:"+key);
+				context.getCounter(Counter.Count1).increment(1);
 		}
 	}
 
@@ -39,6 +44,7 @@ public class SurceReader {
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
 		FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
+		FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
 	}
 
