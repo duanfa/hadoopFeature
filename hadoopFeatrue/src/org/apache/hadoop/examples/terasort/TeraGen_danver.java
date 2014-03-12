@@ -63,7 +63,7 @@ import org.apache.hadoop.util.ToolRunner;
  * To run the program: <b>bin/hadoop jar hadoop-*-examples.jar teragen
  * 10000000000 in-dir</b>
  */
-public class TeraGen extends Configured implements Tool {
+public class TeraGen_danver extends Configured implements Tool {
 	private static final Log LOG = LogFactory.getLog(TeraSort.class);
 
 	public static enum Counters {
@@ -205,7 +205,9 @@ public class TeraGen extends Configured implements Tool {
 	 */
 	public static class SortGenMapper extends
 			Mapper<LongWritable, NullWritable, Text, Text> {
-
+		enum GenCounter{
+			g1,g2
+		}
 		private Text key = new Text();
 		private Text value = new Text();
 		private Unsigned16 rand = null;
@@ -231,6 +233,8 @@ public class TeraGen extends Configured implements Tool {
 			value.set(buffer, TeraInputFormat.KEY_LENGTH,
 					TeraInputFormat.VALUE_LENGTH);
 			context.write(key, value);
+			context.setStatus("key:"+key);
+			context.getCounter(GenCounter.g1).increment(1);
 			crc32.reset();
 			crc32.update(buffer, 0, TeraInputFormat.KEY_LENGTH
 					+ TeraInputFormat.VALUE_LENGTH);
@@ -301,7 +305,7 @@ public class TeraGen extends Configured implements Tool {
 		}
 		FileOutputFormat.setOutputPath(job, outputDir);
 		job.setJobName("TeraGen");
-		job.setJarByClass(TeraGen.class);
+		job.setJarByClass(TeraGen_danver.class);
 		job.setMapperClass(SortGenMapper.class);
 		job.setNumReduceTasks(0);
 		job.setOutputKeyClass(Text.class);
@@ -312,7 +316,7 @@ public class TeraGen extends Configured implements Tool {
 	}
 
 	public static void main(String[] args) throws Exception {
-		int res = ToolRunner.run(new Configuration(), new TeraGen(), args);
+		int res = ToolRunner.run(new Configuration(), new TeraGen_danver(), args);
 		System.exit(res);
 	}
 }

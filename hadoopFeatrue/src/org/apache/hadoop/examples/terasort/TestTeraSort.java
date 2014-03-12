@@ -52,7 +52,7 @@ public class TestTeraSort extends HadoopTestCase {
     String[] genArgs = {NUM_ROWS, sortInput.toString()};
     
     // Run TeraGen
-    assertEquals(ToolRunner.run(conf, new TeraGen(), genArgs), 0);
+    assertEquals(ToolRunner.run(conf, new TeraGen_danver(), genArgs), 0);
   }
   
   private void runTeraSort(Configuration conf,

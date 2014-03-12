@@ -20,7 +20,7 @@ package org.apache.hadoop.examples;
 
 import org.apache.hadoop.examples.dancing.DistributedPentomino;
 import org.apache.hadoop.examples.dancing.Sudoku;
-import org.apache.hadoop.examples.terasort.TeraGen;
+import org.apache.hadoop.examples.terasort.TeraGen_danver;
 import org.apache.hadoop.examples.terasort.TeraSort;
 import org.apache.hadoop.examples.terasort.TeraValidate;
 import org.apache.hadoop.util.ProgramDriver;
@@ -66,7 +66,7 @@ public class ExampleDriver {
       pgd.addClass("join", Join.class, "A job that effects a join over sorted, equally partitioned datasets");
       pgd.addClass("multifilewc", MultiFileWordCount.class, "A job that counts words from several files.");
       pgd.addClass("dbcount", DBCountPageView.class, "An example job that count the pageview counts from a database.");
-      pgd.addClass("teragen", TeraGen.class, "Generate data for the terasort");
+      pgd.addClass("teragen", TeraGen_danver.class, "Generate data for the terasort");
       pgd.addClass("terasort", TeraSort.class, "Run the terasort");
       pgd.addClass("teravalidate", TeraValidate.class, "Checking results of terasort");
       exitCode = pgd.run(argv);

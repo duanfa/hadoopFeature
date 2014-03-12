@@ -34,6 +34,7 @@ public class SMSCDRMapperReducerTest {
 				"655209;1;796764372490213;804422938115889;6"));
 		mapDriver.withOutput(new Text("6"), new IntWritable(1));
 		mapDriver.runTest();
+		System.out.println("end");
 	}
 
 	@Test
