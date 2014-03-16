@@ -234,7 +234,7 @@ public class TeraGen_danver extends Configured implements Tool {
 			value.set(buffer, TeraInputFormat.KEY_LENGTH,
 					TeraInputFormat.VALUE_LENGTH);
 			context.write(key, value);
-			context.setStatus("this kk!!"); //设置状态
+			context.setStatus("this kk!!"); //璁剧疆鐘舵�
 			context.getCounter(GenCounter.g1).increment(1);
 			crc32.reset();
 			crc32.update(buffer, 0, TeraInputFormat.KEY_LENGTH
@@ -309,7 +309,6 @@ public class TeraGen_danver extends Configured implements Tool {
 		long rows =  getNumberOfRows(job);
 		job.getConfiguration().setInt(MRJobConfig.NUM_MAPS, (int)rows/1000);
 		job.setJobName("TeraGen");
-		
 		job.setJarByClass(TeraGen_danver.class);
 		job.setMapperClass(SortGenMapper.class);
 		job.setNumReduceTasks(0);
