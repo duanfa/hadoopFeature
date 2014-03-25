@@ -126,7 +126,7 @@ public class Temperature {
 			}
 			l = ip1.getSecond();
 			r = ip2.getSecond();
-			System.out.println("----KeyComparator---compare:"+ip1+":"+ip2+"----------");
+			System.out.println("----KeyComparator---compare:"+l+":"+r+"----------");
 			return l == r ? 0 : (l < r ? 1 : -1); // reverse
 		}
 	}
@@ -147,7 +147,7 @@ public class Temperature {
 			IntPair ip2 = (IntPair) w2;
 			int l = ip1.getFirst();
 			int r = ip2.getFirst();
-			System.out.println("----GroupingComparator---compare:"+ip1.first+":"+ip2.first+"----------");
+			System.out.println("----GroupingComparator---compare:"+l+":"+r+"----------");
 			return l == r ? 0 : (l < r ? -1 : 1);
 		}
 	}
@@ -178,8 +178,10 @@ public class Temperature {
 		private final IntWritable right = new IntWritable();
 
 		public void reduce(IntPair key, Iterable<NullWritable> values, Context context) throws IOException, InterruptedException {
+			System.out.println("******************************************");
 			left.set(key.getFirst());
 			right.set(key.getSecond());
+			System.out.println("---Reduce-:"+left+","+right+"------------");
 			context.write(left, right);
 		}
 	}
